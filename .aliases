@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+# Shortcuts
+alias ü="ssh -L 9009:localhost:9009 -i ~/.ssh/id_rsa abaumgaertner@13.80.154.97"
+alias t="cd ~/Documents/Freizeit/Training"
+alias m="cd ~/Desktop/Master"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias p="cd ~/Documents/Projekte"
+alias exp="cd ~/Documents/Projekte/Expenses/;./main.py;cd -"
+alias g="git"
+alias cc="clear"
+alias the="cd /Users/andreasbaumgartner/Desktop/Master/master_thesis;latexmk
+-pdf -pv ~/Desktop/Master/master_thesis/thesis.tex;vim -S thesis_session.vim"
+alias hang="cd ~/Documents/Projekte/hangboard_trainer;./main.py"
+alias vrc="vim ~/.vimrc"
+alias als="vim ~/.aliases"
+alias bbt="~/Documents/Projekte/Bash/bibtex_update.sh"
+alias dp="~/Documents/Projekte/Bash/download_to_paper.sh"
+
+colorflag="-G"
+export LSCOLORS='CxBxhxDxfxhxhxhxhxcxcx'
+
+
+# List all files colorized in long format
+alias l="ls -lF ${colorflag}"
+
+# List all files colorized in long format, excluding . and ..
+alias la="ls -lAF ${colorflag}"
+
+# List only directories
+alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+
+# Always use color output for `ls`
+alias ls="command ls ${colorflag}"
+
+# Reverse time ordered `ls`
+alias lr="ls -tr ${colorflag}"
+
+ 
+# Go to Downloads and list in reverse time order:
+alias dlr="dl && lr"
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
