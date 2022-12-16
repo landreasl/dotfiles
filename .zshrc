@@ -2,12 +2,10 @@
 
 source ~/.bash_profile
 
-
 for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
-
 # Set vim-style
 bindkey -v
 
@@ -39,7 +37,15 @@ else
 	violet="\e[1;35m";
 	white="\e[1;37m";
 	yellow="\e[1;33m";
+        COLOR_GIT=$'\e[38;5;39m'
 fi;
 
-PS1="%F{red}%T ${yellow}%n${white}@${blue}%~${white} ~> "
+# Randomly colored fortune
+rand=$(($RANDOM % 200))
+echo "\n$(tput setaf $rand)"
+fortune -s 
+echo "\n"
+
+# Promt
+PS1="%F{red}%T ${yellow}%n${white}@${blue}%~${purple} \$ ${white}"
 export PS1;

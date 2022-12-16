@@ -4,23 +4,23 @@ call plug#begin()
 " Declare the list of plugins.
 Plug 'tpope/vim-sensible'
 Plug 'junegunn/seoul256.vim'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
 Plug 'vifm/vifm.vim'
 Plug 'ap/vim-css-color'
 Plug 'bkad/CamelCaseMotion' 
 Plug 'preservim/nerdtree' 
 Plug 'mbbill/undotree'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
+let leader = "-" 
 
 "Makes new split window appear on right/below
 set splitbelow splitright
 
 "Default mouse-mode
 set mouse=a 
-let leader = "§" 
 nnoremap <leader>h :helpgrep<space>
 "Remap split focus to CTRL + hjkl
 nnoremap <C-h> <C-w>h
@@ -35,28 +35,68 @@ nnoremap <right> :vertical resize +2<CR>
 nnoremap <up> :resize -2<CR> 
 nnoremap <down> :resize +2<CR> 
 
-set spell
+"Use jk to leave insert mode
+inoremap jk <esc>
 
+"Normal mode movements in insert mode
+inoremap jj <c-o>j
+inoremap kk <c-o>k
+inoremap hh <c-o>h
+inoremap ll <c-o>l
+inoremap ww <c-o>w
+inoremap bb <c-o>b
+inoremap uu <c-o>u
+inoremap $$ <c-o>$
+inoremap °° <c-o>°
+inoremap // \
+inoremap üü <c-o>
+inoremap )( {}<left>
+inoremap DW <c-o>daw 
+inoremap CW <c-o>caw 
+inoremap DD <c-o>dd<c-o>o<up>
+inoremap <esc> <nop>
+
+
+"open vimrc
+nnoremap öö :sp $HOME/.vimrc<cr>
+nnoremap ööö :so $HOME/.vimrc<cr>
+
+nnoremap ert :NERDTreeToggle<CR>
+
+nnoremap aa ^
+nnoremap ss $
+nnoremap noo :noh<cr>
+
+nnoremap ww :w<cr> 
+nnoremap qq :q<cr>
+nnoremap YYY :xa<cr>
+
+set spell
 "-----------
 "Visuals
 "-----------
 autocmd InsertEnter * setlocal spell
 autocmd InsertLeave * setlocal nospell
+"-------------
+"Abbreviations
+"-------------
+iabbrev @@    andreas-baumgaertner@gmx.de
 
 set shortmess=filnxtToO
+
 
 
 "highliting of last search remains
 set hlsearch
 
 "no case match
-set smartcase
-
+set ignorecase
 "Show current line number and relative numbers
 set number relativenumber
 highlight LineNr ctermfg=lightgrey
 
 "Colors
+"--------------------
 colorscheme slate
 "Cursor blinks in insert mode
 let &t_SI = "\e[1 q"
@@ -87,23 +127,30 @@ nnoremap <C-N> :Lex!<cr>
 "Manipulation
 "-------------
 
+"Formatting paragraph
+nnoremap gqj gq}gq{<c-o>
+
 "Don't unselect after indenting
 xnoremap <  <gv
 xnoremap >  >gv
+
 "Add new line without going to insert mode
-nmap oo o<Esc>
-nmap OO O<Esc>
-nmap oo o<Esc>
-nmap OO O<Esc>
+nmap oo ojk
+nmap OO Ojk
+nmap oo ojk
+nmap OO Ojk
+
 "Search globally 
 nnoremap S :%s///c<Left><Left><Left><Left><Left>
 
+
+
 "Shorter timewindow between doublekey commands
-set timeoutlen=300
+set timeoutlen=150
 set noerrorbells
 
 "Show Macros
-nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+nnoremap mmm  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
 "Undo in insert mode
 inoremap <C-u> <ESC>ui
@@ -135,21 +182,16 @@ autocmd BufReadPost *
 "------
 "Latex
 "-----
-nnoremap <F2> :w<cr>:term ++close latexmk -pdf -pv %<cr>
-nnoremap <F3> :w<cr>:term ++close latexmk -pdf %<cr>latexmk -c<cr>
 
 "------
 "Vimrc
 "------
 "Source RC
-nnoremap <F4> :so $HOME/.vimrc<cr>
+nnoremap <F4> :w<cr>:so $HOME/.vimrc<cr>
+
 "Open RC
 nnoremap <F6> :sp $HOME/.vimrc<cr>
 
-"------
-"Macro
-"------ 
-nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
 "--------
 "NERDTree

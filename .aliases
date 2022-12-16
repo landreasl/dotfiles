@@ -8,23 +8,43 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
-# Shortcuts
-alias ü="ssh -L 9009:localhost:9009 -i ~/.ssh/id_rsa abaumgaertner@13.80.154.97"
-alias t="cd ~/Documents/Freizeit/Training"
+# FBK Server
+alias üü="open -a Safari http://127.0.0.1:9009/lab"
+alias ü="üü;ssh -L 9009:localhost:9009 -i ~/.ssh/id_rsa abaumgaertner@13.80.154.97"
 alias m="cd ~/Desktop/Master"
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias p="cd ~/Documents/Projekte"
-alias exp="cd ~/Documents/Projekte/Expenses/;./main.py;cd -"
-alias g="git"
-alias cc="clear"
-alias the="cd /Users/andreasbaumgartner/Desktop/Master/master_thesis;latexmk
--pdf -pv ~/Desktop/Master/master_thesis/thesis.tex;vim -S thesis_session.vim"
-alias hang="cd ~/Documents/Projekte/hangboard_trainer;./main.py"
-alias vrc="vim ~/.vimrc"
-alias als="vim ~/.aliases"
+alias the="vim -S ~/Desktop/Master/master_thesis/thesis_session.vim"
 alias bbt="~/Documents/Projekte/Bash/bibtex_update.sh"
 alias dp="~/Documents/Projekte/Bash/download_to_paper.sh"
+
+# Training
+# Start Hangboard Session
+alias hang="cd ~/Documents/Projekte/hangboard_trainer/;python main.py"
+# Start vim Hangboard editing Session
+alias hange="vim -S ~/Documents/Projekte/hangboard_trainer/edit_hang_vimsession.vim"
+alias t="cd ~/Documents/Freizeit/Training"
+alias exp="cd ~/Documents/Projekte/Expenses/;./main.py;cd -"
+alias p="cd ~/Documents/Projekte"
+
+# Basic
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias doc="cd ~/Documents"
+alias g="git"
+alias gs="git status"
+alias cc="clear"
+
+# Start pomodoro timer
+alias pom="~/Documents/Projekte/Bash/pomodoro.sh"
+
+alias vrc="vim ~/.vimrc"
+alias als="vim ~/.aliases"
+alias zrc="vim ~/.zshrc"
+alias brc="vim ~/.bashrc"
+
+alias awesome="cd ~/awesome-cli;go run main.go"
+
+# Open csv file in readable format in less
+alias csv="~/Documents/Projekte/Bash/columns.sh" 
 
 colorflag="-G"
 export LSCOLORS='CxBxhxDxfxhxhxhxhxcxcx'
@@ -34,7 +54,7 @@ export LSCOLORS='CxBxhxDxfxhxhxhxhxcxcx'
 alias l="ls -lF ${colorflag}"
 
 # List all files colorized in long format, excluding . and ..
-alias la="ls -lAF ${colorflag}"
+alias la="ls -lAFh ${colorflag}"
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
@@ -48,6 +68,8 @@ alias lr="ls -tr ${colorflag}"
  
 # Go to Downloads and list in reverse time order:
 alias dlr="dl && lr"
+
+alias grep="grep --colour"
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
